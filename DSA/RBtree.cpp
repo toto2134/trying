@@ -68,11 +68,6 @@ RBnode *RBtree::insert(info &a, RBnode *r) {
         return r;
     }
     else if(red_tag) {
-        if(r->left->color && r->right->color) {//叔祖换色
-            r->left->turn_color();
-            r->right->turn_color();
-            r->turn_color();
-        }
         if(cur_child == r->left) { //红黑旋转
             if(cur_child->left->color)
                 r = rotate_LL(r, cur_child, cur_child->left);
@@ -84,6 +79,11 @@ RBnode *RBtree::insert(info &a, RBnode *r) {
                 r = rotate_RL(r, cur_child, cur_child->left);
             else 
                 r = rotate_RR(r, cur_child, cur_child->right);
+        }
+        if(r->left->color && r->right->color) {//叔祖换色
+            r->left->turn_color();
+            r->right->turn_color();
+            r->turn_color();
         }
         red_tag = 0;
         return r;
@@ -106,7 +106,7 @@ RBnode *RBtree::del_node(RBnode *t) {
         }
         //TODO:双黑调整
     }
-    else { //有一个叶子节点，继承颜色上移？
+    else { //有一个叶子节点，继承颜色上移
         if(t->left) {
             t->left->turn_color();
             RBnode *p = t->left;
