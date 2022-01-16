@@ -16,7 +16,7 @@ class RBnode {
     info data;
     RBnode *left, *right;
     RBnode *parent;//maybe useless?
-    int rank;   // use for debug?
+    int rank;   // use for debug
     bool color; // 0 black, 1 red
 public:
     RBnode(): color(1), left(nullptr), right(nullptr), parent(nullptr) {}
